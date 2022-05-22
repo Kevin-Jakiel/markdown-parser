@@ -202,4 +202,61 @@ public class MarkdownParseTest {
         ArrayList<String> res = new ArrayList<String>();
         assertEquals(res, links);
     }
+
+    @Test
+    public void Snippet1_Test() throws IOException{
+        Path fileName = Path.of("Snippet1.md"); 
+        String content = Files.readString(fileName);
+        String[] split = content.split("\n");
+        ArrayList<String> links = new ArrayList<String>();
+        for(String s: split){
+            if(MarkdownParse.getLinks(s) != null){
+                links.addAll(MarkdownParse.getLinks(s));
+            }
+        }
+
+        ArrayList<String> res = new ArrayList<String>();
+        res.add("`google.com");
+        res.add("google.com");
+        res.add("ucsd.edu");
+        assertEquals(res, links);
+    }
+
+    @Test
+    public void Snippet2_Test() throws IOException{
+        Path fileName = Path.of("Snippet2.md"); 
+        String content = Files.readString(fileName);
+        String[] split = content.split("\n");
+        ArrayList<String> links = new ArrayList<String>();
+        for(String s: split){
+            if(MarkdownParse.getLinks(s) != null){
+                links.addAll(MarkdownParse.getLinks(s));
+            }
+        }
+
+        ArrayList<String> res = new ArrayList<String>();
+        res.add("b.com");
+        res.add("a.com(())");
+        res.add("example.com");
+        assertEquals(res, links);
+    }
+
+    @Test
+    public void Snippet3_Test() throws IOException{
+        Path fileName = Path.of("Snippet3.md"); 
+        String content = Files.readString(fileName);
+        String[] split = content.split("\n");
+        ArrayList<String> links = new ArrayList<String>();
+        for(String s: split){
+            if(MarkdownParse.getLinks(s) != null){
+                links.addAll(MarkdownParse.getLinks(s));
+            }
+        }
+
+        ArrayList<String> res = new ArrayList<String>();
+        res.add("https://www.twitter.com");
+        res.add("https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule");
+        res.add("https://cse.ucsd.edu/");
+        assertEquals(res, links);
+    }
 }
